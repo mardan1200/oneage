@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عمر کیلکولیٹر</title>
+    <style>
+        /* Your existing CSS */
+        
+        /* Style for the 2025 image */
+        #yearImage {
+            width: 200px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="titleContainer">
+        <h2 id="title">Age Calculator / عمر کیلکولیٹر</h2>
+    </div>
+    
+    <!-- Image for the year 2025 -->
+    <div id="imageContainer">
+        <img src="your-image-2025.jpg" alt="Year 2025" id="yearImage">
+    </div>
+
+    <div id="ageCalculator">
+        <label id="birthdateLabel" for="birthdate">Enter your birthdate: اپنی تاریخ پیدائش درج کریں:</label>
+        <input type="date" id="birthdate">
+        <button onclick="calculateAge()" id="calculateButton">Calculate Age / عمر معلوم کریں</button>
+        <p id="result"></p>
+        <p id="ageIn2025"></p>
+        <p id="currentTime"></p>
+    </div>
+
+    <button onclick="changeLanguage('en')" id="enButton">Switch to English</button>
+    <button onclick="changeLanguage('ur')" id="urButton">سویچ کریں اردو</button>
+
+    <script>
+        // Your existing JavaScript functions
+
+        function calculateAge() {
+            const birthdate = document.getElementById("birthdate").value;
+            const result = document.getElementById("result");
+            const ageIn2025 = document.getElementById("ageIn2025");
+
+            if (birthdate === "") {
+                result.textContent = currentLanguage === 'en' ? "Please enter your birthdate." : "براہ کرم اپنی تاریخ پیدائش درج کریں۔";
+                ageIn2025.textContent = "";
+                return;
+            }
+
+            const birthDate = new Date(birthdate);
+            const today = new Date();
+            const targetYear = 2025;
+            const futureDate = new Date(targetYear, today.getMonth(), today.getDate());
+
+            // Calculate current age
+            let currentYears = today.getFullYear() - birthDate.getFullYear();
+            let currentMonths = today.getMonth() - birthDate.getMonth();
+            let currentDays = today.getDate() - birthDate.getDate();
+
+            if (currentMonths < 0) {
+                currentMonths += 12;
+                currentYears--;
+            }
+            if (currentDays < 0) {
+                currentDays += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+                currentMonths--;
+            }
+
+            let futureYears = futureDate.getFullYear() - birthDate.getFullYear();
+            let futureMonths = futureDate.getMonth() - birthDate.getMonth();
+            let futureDays = futureDate.getDate() - birthDate.getDate();
+
+            if (futureMonths < 0) {
+                futureMonths += 12;
+                futureYears--;
+            }
+            if (futureDays < 0) {
+                futureDays += new Date(futureDate.getFullYear(), futureDate.getMonth(), 0).getDate();
+                futureMonths--;
+            }
+
+            result.textContent = currentLanguage === 'en' ?
+                `Your current age is: ${currentYears} years, ${currentMonths} months, ${currentDays} days` :
+                `آپ کی موجودہ عمر ہے: ${currentYears} سال, ${currentMonths} مہینے, ${currentDays} دن`;
+
+            ageIn2025.textContent = currentLanguage === 'en' ?
+                `Your age in 2025 will be: ${futureYears} years, ${futureMonths} months, ${futureDays} days` :
+                `سال 2025 میں آپ کی عمر ہوگی: ${futureYears} سال, ${futureMonths} مہینے, ${futureDays} دن`;
+        }
+
+        function changeLanguage(language) {
+            currentLanguage = language;
+            if (currentLanguage === 'en') {
+                document.getElementById("title").textContent = "Age Calculator";
+                document.getElementById("birthdateLabel").textContent = "Enter your birthdate:";
+                document.getElementById("calculateButton").textContent = "Calculate Age";
+                document.getElementById("enButton").style.display = 'none';
+                document.getElementById("urButton").style.display = 'inline-block';
+            } else {
+                document.getElementById("title").textContent = "عمر کیلکولیٹر";
+                document.getElementById("birthdateLabel").textContent = "اپنی تاریخ پیدائش درج کریں:";
+                document.getElementById("calculateButton").textContent = "عمر معلوم کریں";
+                document.getElementById("enButton").style.display = 'inline-block';
+                document.getElementById("urButton").style.display = 'none';
+            }
+        }
+
+        function updateTime() {
+            // Your time update function
+        }
+
+        function updateDate() {
+            // Your date update function
+        }
+
+        function updateVisitorCount() {
+            // Your visitor count function
+        }
+
+        updateTime();
+        updateDate();
+        updateVisitorCount();
+    </script>
+</body>
+</html>
